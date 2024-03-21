@@ -19,8 +19,16 @@ selectScissors.addEventListener("click", () => {
 });
 
 const roundResult = document.querySelector("#roundResult")
-const body=document.querySelector("#body")
-body.appendChild(roundResult)
+const body = document.querySelector("#body")
+//body.appendChild(roundResult)
+
+const showComputerWin = document.querySelector("#scoreComputer");
+const showPlayerWin = document.querySelector("#scorePlayer");
+
+let toAppend = [roundResult, showComputerWin, showPlayerWin];
+for (tag of toAppend) {
+    body.appendChild(tag)
+}
 
 const choices = ['rock', 'paper', 'scissors'];
 let computerChoice
@@ -49,37 +57,49 @@ const gameRounds = 5
 let computerWin = 0;
 let playerWin = 0;
 
+function showRunningScore(){
+    showComputerWin.textContent = computerWin;
+    showPlayerWin.textContent = playerWin;
+}
 function playRound(me = playerChoice, computer = computerChoice()) {
     if (me === 'rock' && computer === 'paper') {
-        roundResult.textContent = "Computer Wins!"
+        roundResult.textContent = "Rock beats paper! Computer Wins!"
         computerWin++
+        showRunningScore();
     }
     if (me === 'paper' && computer === 'rock') {
-        roundResult.textContent="Paper beats rock! You win"
+        roundResult.textContent = "Paper beats rock! You win"
         //alert("Paper beats rock! You win")
         playerWin++
+        showRunningScore();
     }
     if (me === 'rock' && computer === 'scissors') {
-        roundResult.textContent="Rock beats scissors! You win"
+        roundResult.textContent = "Rock beats scissors! You win"
         //alert("Rock beats scissors! You win")
         playerWin++
+        showRunningScore();
     }
     if (me === 'scissors' && computer === 'rock') {
-        roundResult.textContent="Rock beats scissors! You lose"
+        roundResult.textContent = "Rock beats scissors! You lose"
         //alert("Rock beats scissors! You lose")
         computerWin++
+        showRunningScore();
     }
     if (me === 'paper' && computer === 'scissors') {
-        roundResult.textContent="Scissors beats paper! You lose"
+        roundResult.textContent = "Scissors beats paper! You lose"
         //alert("Scissors beats paper! You lose")
         computerWin++
+        showRunningScore();
     }
     if (me === 'scissors' && computer === 'paper') {
-        roundResult.textContent="Scissors beats paper! You win"
+        roundResult.textContent = "Scissors beats paper! You win"
         //alert("Scissors beats paper! You win")
         playerWin++
+        showRunningScore();
     }
 }
+
+
 
 function playGame() {
 
@@ -94,4 +114,5 @@ function playGame() {
     }
     else { alert("COMPUTER WINS THE GAME") }
 }
-//playGame()
+
+
