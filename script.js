@@ -25,7 +25,9 @@ const body = document.querySelector("#body")
 const showComputerWin = document.querySelector("#scoreComputer");
 const showPlayerWin = document.querySelector("#scorePlayer");
 
-let toAppend = [roundResult, showComputerWin, showPlayerWin];
+const btnPlayAgain = document.createElement("button")
+
+let toAppend = [showComputerWin, showPlayerWin];
 for (tag of toAppend) {
     body.appendChild(tag)
 }
@@ -58,9 +60,16 @@ let computerWin = 0;
 let playerWin = 0;
 
 function showRunningScore(){
-    showComputerWin.textContent = computerWin;
-    showPlayerWin.textContent = playerWin;
+    showComputerWin.textContent = "COMPUTER: " + computerWin;
+    showPlayerWin.textContent = "YOU: " + playerWin;
 }
+
+btnPlayAgain.addEventListener("click", ()=>{
+    computerWin=0;
+    playerWin=0;
+    showComputerWin.textContent="";
+    showPlayerWin.textContent=""
+})
 function playRound(me = playerChoice, computer = computerChoice()) {
     if (me === 'rock' && computer === 'paper') {
         roundResult.textContent = "Rock beats paper! Computer Wins!"
@@ -96,6 +105,16 @@ function playRound(me = playerChoice, computer = computerChoice()) {
         //alert("Scissors beats paper! You win")
         playerWin++
         showRunningScore();
+    }
+    if(computerWin==5){
+        alert("PC WINS!")
+        btnPlayAgain.textContent="PLAY AGAIN"
+        body.appendChild(btnPlayAgain)
+    }
+    else if(playerWin==5){
+        alert("HUMAN YOU WIN!")
+        btnPlayAgain.textContent="PLAY AGAIN"
+        body.appendChild(btnPlayAgain)
     }
 }
 
